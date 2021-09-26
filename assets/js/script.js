@@ -9,27 +9,32 @@
 //the functions below show how to make it editable on click. reference this for how to make that happen when you're there
 
 
-var input = document.getElementById("inputt");
+// var input = document.getElementById("event");
 
 // var eventt = document.getElementsById("#event");
 
 var now = moment().format("hA");
-var nine = moment('9:00 am', 'hh:mm A').format('h:mm A');
-var ten = moment('10:00 am', 'hh:mm A').format('h:mm A');
-var eleven = moment('11:00 am', 'hh:mm A').format('h:mm A');
-var twelve = moment('12:00 pm', 'hh:mm A').format('h:mm A');
-var one = moment('1:00 pm', 'hh:mm A').format('h:mm A');
-var two = moment('2:00 pm', 'hh:mm A').format('h:mm A');
-var three = moment('3:00 pm', 'hh:mm A').format('h:mm A');
-var four = moment('4:00 pm', 'hh:mm A').format('h:mm A');
-var five = moment('5:00 pm', 'hh:mm A').format('h:mm A');
-var six = moment('6:00 pm', 'hh:mm A').format('h:mm A');
-var nutt = document.getElementById("event");
 
-var pp = document.getElementsByTagName("p");
-
+var eight = moment('8:00 am', 'hh:mm A').format('hA');
+var nine = moment('09:00 am', 'hh:mm A').format('hA');
+var ten = moment('10:00 am', 'hh:mm A').format('hA');
+var eleven = moment('11:00 am', 'hh:mm A').format('hA');
+var twelve = moment('12:00 pm', 'hh:mm A').format('hA');
+var one = moment('1:00 pm', 'hh:mm A').format('hA');
+var two = moment('2:00 pm', 'hh:mm A').format('hA');
+var three = moment('3:00 pm', 'hh:mm A').format('hA');
+var four = moment('4:00 pm', 'hh:mm A').format('hA');
+var five = moment('5:00 pm', 'hh:mm A').format('hA');
+var six = moment('7:00 pm', 'hh:mm A').format('hA');
 
 
+
+// var nutt = document.getElementById("event");
+
+// var pp = document.getElementsByTagName("p");
+
+
+$(".eight").text(eight);
 $(".nine").text(nine);
 $(".ten").text(ten);
 $(".eleven").text(eleven);
@@ -41,49 +46,100 @@ $(".four").text(four);
 $(".five").text(five);
 $(".six").text(six);
 
-$("p").click(function () {
-  var getClass = this.className;
-  console.log(this.textContent);
 
+$("p").each(function () {
   
-  if(this.textContent <= now){
-    console.log("yes");
+  // console.log(this.textContent);
+  if (this.textContent > now) {
+    $(this).closest("div.row").find('textarea')
+    .removeClass("present")
+    .addClass("future");
+    console.log("tits");
   }
-  if(this.textContent >= now){
-    console.log("no");
+  if (this.textContent < now) {
+    
+    $(this).closest("div.row").find('textarea')
+      .removeClass("present")
+      .addClass("past");
   }
-  
-  
+  if (this.textContent === now) {
+    
+    $(this).closest("div.row").find('textarea');
+   
+      
+  }
+
 });
-function butt(){
 
-if(two <= now){
-$(nutt)
-.removeClass("present")
-.addClass("past");
-console.log( now);
+$("button").click(function(){
+
+  var temp = [];
+ var text = $(this).closest("div.row").find("textarea").val();
+ let textSerialized = JSON.stringify(text);
+temp.push(
+  {
+    text
+  }
+)
+
+let textSerialized = JSON.stringify(text);
+
+ localStorage.setItem("text", textSerialized);
+
+
+
+  console.log(text);
+
+});
+
+data = {
+  text: "sdc"
 }
 
 
-};
+// function butt() {
 
-$(input).keypress((e) => {
-  if (e.which === 13) {
-  const userInput = input.value;
-  var som = document.getElementsByClassName("new");
-  var baby = document.createElement("li");
-  baby.textContent = userInput;
-  const parent = $(som).parent();
-  parent.append(baby);
-  butt();
-  // listItem = $("<li>")
-  // .addClass("new")
-  // .text(userInput);
-  // parent.appendChild(listItem);
+//   if (two <= now) {
+//     $(nutt)
+//       .removeClass("present")
+//       .addClass("past");
+//     console.log(now);
+//   }
 
-  //set input.value to li element, add new input
-  }
-});
+
+// };
+
+// $("textarea").click(function(){
+  
+// $(this).append(input);
+
+// });
+
+
+
+
+
+// $(input).keypress((e) => {
+//   if (e.which === 13) {
+//     const userInput = input.value;
+//     var som = document.getElementsByClassName("new");
+//     var baby = document.createElement("li");
+//     baby.textContent = userInput;
+//     const parent = $(som).parent();
+//     parent.append(baby);
+//     butt();
+// }
+// });
+
+
+
+
+    // listItem = $("<li>")
+    // .addClass("new")
+    // .text(userInput);
+    // parent.appendChild(listItem);
+
+    //set input.value to li element, add new input
 
 
 
@@ -98,13 +154,13 @@ $(input).keypress((e) => {
 // var saveTasks = function () {
 //     localStorage.setItem("tasks", JSON.stringify(tasks));
 //   };
-  
-  
+
+
 //   $(".list-group").on("blur", "textarea", function () {
 //     var text = $(this)
 //       .val()
 //       .trim();
-  
+
 //     var status = $(this)
 //       .closest(".list-group")
 //       .attr("id")
@@ -118,7 +174,7 @@ $(input).keypress((e) => {
 //     var taskP = $("<p>")
 //       .addClass("m-1")
 //       .text(text);
-  
+
 //     //replace textarea with p element
 //     $(this).replaceWith(taskP);
 //   });
@@ -132,37 +188,37 @@ $(input).keypress((e) => {
 //   .attr("type", "text")
 //   .addClass("form-control")
 //   .val(date);
-  
+
 //   //swaps els
 //   $(this).replaceWith(dateInput);
-  
+
 //   //automatically focus on new element
 //   dateInput.trigger("focus");
-  
+
 //   });
-  
+
 //   $(".list-group").on("blur", "input[type='text']", function(){
 //   var date =$(this)
 //   .val()
 //   .trim();
-  
+
 //   var status = $(this)
 //   .closest(".list-group")
 //   .attr("id")
 //   .replace("list-", "");
-  
+
 //   var index = $(this)
 //   .closest(".list-group-item")
 //   .index();
-  
+
 //   tasks[status][index].date = date;
 //   saveTasks();
-  
+
 //   var taskSpan = $("<span>")
 //   .addClass("badge badge-primary badge-pill")
 //   .text(date);
-  
-  
+
+
 //   $(this).replaceWith(taskSpan);
-  
+
 //   });
