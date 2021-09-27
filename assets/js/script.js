@@ -54,13 +54,15 @@ $("p").each(function () {
     $(this).closest("div.row").find('textarea')
     .removeClass("present")
     .addClass("future");
-    console.log("tits");
+    
+    console.log(this.textContent, now);
   }
   if (this.textContent < now) {
     
     $(this).closest("div.row").find('textarea')
       .removeClass("present")
       .addClass("past");
+      
   }
   if (this.textContent === now) {
     
@@ -73,30 +75,30 @@ $("p").each(function () {
 
 $("button").click(function(){
 
-  var temp = [];
+  
  var text = $(this).closest("div.row").find("textarea").val();
- let textSerialized = JSON.stringify(text);
-temp.push(
-  {
-    text
-  }
-)
+ var time = $(this).closest("div.row").find("textarea").attr("id");
+localStorage.setItem(time, text);
+ console.log(time);
+ 
+ 
+});
 
-let textSerialized = JSON.stringify(text);
+$(document).ready(function(){
+   var resetVal = localStorage.getItem('event');
+   document.getElementById("event").value = resetVal;
 
- localStorage.setItem("text", textSerialized);
-
-
-
-  console.log(text);
 
 });
 
-data = {
-  text: "sdc"
+junk = {
+textt: ""
 }
+var saveText = function(junk){
 
+ 
 
+}
 // function butt() {
 
 //   if (two <= now) {
